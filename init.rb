@@ -12,6 +12,7 @@ Redmine::Plugin.register :redmine_flowdock do
 
   settings :partial => 'settings/redmine_flowdock',
     :default => {
-      :api_token => {}
+      :api_token => {},
+      :publish_wiki_updates => ''
     }
 end
