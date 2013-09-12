@@ -25,6 +25,11 @@ class FlowdockListener < Redmine::Hook::Listener
     set_data(context[:issue])
     issue   = context[:issue]
 
+    # Only send updates on high priority tickets.
+    if issue.priority.position_name !~ /^(highest|high2)$/
+      return
+    end
+
     subject = "Updated \"#{@issue.subject}\" (#{@tracker})"
 
     assigned_to = if issue.assigned_to
