@@ -47,14 +47,13 @@ class FlowdockListener < Redmine::Hook::Listener
     set_data(context[:page])
 
     if Setting.plugin_redmine_flowdock[:publish_wiki_updates] &&
-      "yes" == Setting.plugin_redmine_flowdock[:publish_wiki_updates][@project.identifier]
-      return
+      ("yes" == Setting.plugin_redmine_flowdock[:publish_wiki_updates][@project.identifier])
+
+      subject = "Updated \"#{@page.pretty_title}\" (Wiki)"
+      body = @@renderer.wiki_diff_to_html(@page)
+
+      send_message!(subject, body)
     end
-
-    subject = "Updated \"#{@page.pretty_title}\" (Wiki)"
-    body = @@renderer.wiki_diff_to_html(@page)
-
-    send_message!(subject, body)
   end
 
   protected
