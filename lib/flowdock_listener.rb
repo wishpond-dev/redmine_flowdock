@@ -39,6 +39,8 @@ class FlowdockListener < Redmine::Hook::Listener
   end
 
   def controller_wiki_edit_after_save(context = {})
+    return unless Setting.plugin_redmine_flowdock[:publish_wiki_updates][@project.identifier]
+
     set_data(context[:page])
 
     subject = "Updated \"#{@page.pretty_title}\" (Wiki)"

@@ -5,4 +5,8 @@
   <%= content_tag(:label, project.name) %>
   <%= text_field_tag("settings[api_token][#{project.identifier}]", @settings[:api_token][project.identifier], :size => 40) %>
 </p>
+<p>
+  <%= content_tag(:label, "Publish Wiki updates") %>
+  <%= check_box_tag("settings[publish_wiki_updates][#{project.identifier}]", "yes", @settings[:publish_wiki_updates][project.identifier]) %>
+</p>
 <% end %>
