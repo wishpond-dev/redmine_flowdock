@@ -47,7 +47,7 @@ class FlowdockListener < Redmine::Hook::Listener
     set_data(context[:page])
 
     if Setting.plugin_redmine_flowdock[:publish_wiki_updates] &&
-      Setting.plugin_redmine_flowdock[:publish_wiki_updates] [@project.identifier].blank?
+      "yes" == Setting.plugin_redmine_flowdock[:publish_wiki_updates][@project.identifier]
       return
     end
 
